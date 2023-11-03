@@ -39,6 +39,8 @@ export class FormsComponent{
 
   handleUpdate(line: number){
     this.courseList[line] = {name: this.newName, category: this.newCategory}
+    this.newCategory = "";
+    this.newName = "";
     this.handleToggleUpdate();
   }
 }
