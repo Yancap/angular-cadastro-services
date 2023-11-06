@@ -7,12 +7,12 @@ import { Course } from '../../models/forms';
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.scss']
 })
-export class FormsComponent{
+export class FormsComponent implements DoCheck{
   name!: string;
   category!: string;
   courseList!: Course[];
-  newName!: string;
-  newCategory!: string;
+  newName!: string | null;
+  newCategory!: string | null;
   isUpdating = false;
   lineThatIsUpdating!: number | undefined;
 
@@ -22,6 +22,11 @@ export class FormsComponent{
     this.courseList = this.formService.courseList;
   }
   
+  ngDoCheck(): void {
+      console.log("Mudo");
+      
+  }
+
   handleAdd() {
     this.courseList.push({name: this.name, category: this.category});
     this.category = "";
@@ -33,14 +38,16 @@ export class FormsComponent{
   }
 
   handleToggleUpdate(line?: number){
+    console.log(this.lineThatIsUpdating);
+    
     this.lineThatIsUpdating = line;
     this.isUpdating = !this.isUpdating;
   }
 
   handleUpdate(line: number){
-    this.courseList[line] = {name: this.newName, category: this.newCategory}
-    this.newCategory = "";
-    this.newName = "";
+    this.courseList[line] = {name: this.newName ?? this.courseList[line].name, category: this.newCategory ?? this.courseList[line].category}
+    this.newCategory = null;
+    this.newName = null;
     this.handleToggleUpdate();
   }
 }

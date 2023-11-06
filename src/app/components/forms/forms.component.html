@@ -33,24 +33,24 @@
           <tr *ngFor="let curso of courseList; let i=index">
             <td>{{i}}</td>
             <td>
-              <span *ngIf="!isUpdating && lineThatIsUpdating !== i; else updatingName">
+              <span *ngIf="!isUpdating || lineThatIsUpdating !== i; else updatingName">
                 {{curso.name}}
               </span>
               <ng-template #updatingName>
-                <input type="text" class="form-control" [(ngModel)]="newName" />
+                <input type="text" class="form-control" [(ngModel)]="newName" [placeholder]="this.courseList[i].name"/>
               </ng-template>
             </td>
             <td>
-              <span *ngIf="!isUpdating && lineThatIsUpdating !== i; else updatingCategory">
+              <span *ngIf="!isUpdating || lineThatIsUpdating !== i; else updatingCategory">
                 {{curso.category}}
               </span>
               <ng-template #updatingCategory>
-                <input type="text" class="form-control" [(ngModel)]="newCategory" />
+                <input type="text" class="form-control" [(ngModel)]="newCategory" [placeholder]="this.courseList[i].category"/>
               </ng-template>
             </td>
             <td>
               
-              <span class="d-flex gap-2" *ngIf="!isUpdating && lineThatIsUpdating !== i; else updating">
+              <span class="d-flex gap-2" *ngIf="!isUpdating || lineThatIsUpdating !== i; else updating">
                 <button class="btn btn-warning mb-1 btn-sm" (click)="handleToggleUpdate(i)">
                   Atualizar
                 </button>
@@ -66,7 +66,7 @@
                     Confirmar
                   </button>
     
-                  <button class="btn btn-outline-danger mb-1 btn-sm" (click)="handleToggleUpdate()">
+                  <button class="btn btn-outline-danger mb-1 btn-sm" (click)="handleToggleUpdate(i)">
                     Cancelar
                   </button>
                 </span>
