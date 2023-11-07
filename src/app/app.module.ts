@@ -6,18 +6,21 @@ import { AppComponent } from './app.component';
 import { FormsComponent } from './components/forms/forms.component';
 import { FormsModule } from '@angular/forms';
 import { FormsService } from './components/forms/forms.component.service';
+import { HistoricComponent } from './components/historic/historic.component';
+import { HistoricService } from './components/historic/historic.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormsComponent
+    FormsComponent,
+    HistoricComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [FormsService],
+  providers: [FormsService, HistoricService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

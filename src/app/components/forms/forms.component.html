@@ -30,7 +30,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let curso of courseList; let i=index">
+          <tr *ngFor="let curso of courseList; let i=index" >
             <td>{{i}}</td>
             <td>
               <span *ngIf="!isUpdating || lineThatIsUpdating !== i; else updatingName">

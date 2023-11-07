@@ -1,0 +1,58 @@
+<main class="container">
+  <div class=" card mt-3">
+    <div class="card-header ">
+      <div class="float-left">
+        <h1>Históricos</h1>
+      </div>
+      <div class="py-4">
+        <button class="btn btn-secondary mb-1 btn-sm" (click)="handleClean()">
+          Limpar
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Curso</th>
+            <th>Categoria</th>
+            <th>Data de modificação</th>
+            <th>Tipo de operação</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let h of historicStack; let i=index" style="position: relative;">
+            
+            <td>{{i}}</td>
+            <td [ngClass]="h.mappedUpdate && h.mappedUpdate.includes('name') ? 'row-update' : null">
+              <span>
+                {{h.name}}
+              </span>
+            </td>
+            <td [ngClass]="h.mappedUpdate && h.mappedUpdate.includes('category') ? 'row-update' : null">
+              <span>
+                {{h.category}}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{h.modified_at | date: "short"}}
+              </span>
+            </td>
+            <td>
+              <span>
+                {{ h.type }}
+              </span>
+            </td>
+            <td>
+              
+            </td>
+            <div class="bg" [ngClass]="h.type === 'create' ? 'row-create' : 'row-delete' " *ngIf="h.type !== 'update'"></div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
